@@ -432,13 +432,12 @@ export interface ApiAuthorAuthor extends Struct.CollectionTypeSchema {
 export interface ApiCategoryCategory extends Struct.CollectionTypeSchema {
   collectionName: 'categories';
   info: {
-    description: 'Organize your content into categories';
     displayName: 'Category';
     pluralName: 'categories';
     singularName: 'category';
   };
   options: {
-    draftAndPublish: false;
+    draftAndPublish: true;
   };
   attributes: {
     categoryName: Schema.Attribute.String;
@@ -492,11 +491,37 @@ export interface ApiGlobalGlobal extends Struct.SingleTypeSchema {
   };
 }
 
+export interface ApiOrderOrder extends Struct.CollectionTypeSchema {
+  collectionName: 'orders';
+  info: {
+    displayName: 'Order';
+    pluralName: 'orders';
+    singularName: 'order';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::order.order'> &
+      Schema.Attribute.Private;
+    products: Schema.Attribute.JSON;
+    publishedAt: Schema.Attribute.DateTime;
+    stripeId: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
 export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   collectionName: 'products';
   info: {
     description: '';
-    displayName: 'product';
+    displayName: 'Product';
     pluralName: 'products';
     singularName: 'product';
   };
@@ -505,19 +530,19 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
   };
   attributes: {
     active: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
-    brand: Schema.Attribute.Enumeration<
+    Brand: Schema.Attribute.Enumeration<
       ['Alienware', 'Razer', 'Asus ', 'MSI', 'AORUS', 'HP', 'Lenovo ', 'Acer ']
     >;
     category: Schema.Attribute.Relation<'oneToOne', 'api::category.category'>;
     createdAt: Schema.Attribute.DateTime;
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
-    description: Schema.Attribute.Text;
+    description: Schema.Attribute.String;
     images: Schema.Attribute.Media<
       'images' | 'files' | 'videos' | 'audios',
       true
     >;
-    isfeatured: Schema.Attribute.Boolean;
+    isFeatured: Schema.Attribute.Boolean;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
@@ -525,7 +550,7 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     > &
       Schema.Attribute.Private;
     origin: Schema.Attribute.Enumeration<
-      ['Africa', 'Asia', 'America', 'Europa']
+      ['Africa', 'Asia', 'American', 'Europe']
     >;
     price: Schema.Attribute.Decimal;
     productName: Schema.Attribute.String;
@@ -1050,6 +1075,7 @@ declare module '@strapi/strapi' {
       'api::author.author': ApiAuthorAuthor;
       'api::category.category': ApiCategoryCategory;
       'api::global.global': ApiGlobalGlobal;
+      'api::order.order': ApiOrderOrder;
       'api::product.product': ApiProductProduct;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;

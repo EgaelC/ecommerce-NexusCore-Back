@@ -4,7 +4,7 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "product",
+    "displayName": "Product",
     "description": ""
   },
   "options": {
@@ -19,7 +19,7 @@
       "targetField": "productName"
     },
     "description": {
-      "type": "text"
+      "type": "string"
     },
     "images": {
       "type": "media",
@@ -44,19 +44,11 @@
       "enum": [
         "Africa",
         "Asia",
-        "America",
-        "Europa"
+        "American",
+        "Europe"
       ]
     },
-    "isfeatured": {
-      "type": "boolean"
-    },
-    "category": {
-      "type": "relation",
-      "relation": "oneToOne",
-      "target": "api::category.category"
-    },
-    "brand": {
+    "Brand": {
       "type": "enumeration",
       "enum": [
         "Alienware",
@@ -68,6 +60,14 @@
         "Lenovo ",
         "Acer "
       ]
+    },
+    "isFeatured": {
+      "type": "boolean"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category"
     }
   }
 }

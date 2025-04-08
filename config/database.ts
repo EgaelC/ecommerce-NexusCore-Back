@@ -8,9 +8,9 @@ export default ({ env }) => {
       connection: {
         host: env('DATABASE_HOST', 'localhost'),
         port: env.int('DATABASE_PORT', 3306),
-        database: env('DATABASE_NAME', 'strapi'),
-        user: env('DATABASE_USERNAME', 'strapi'),
-        password: env('DATABASE_PASSWORD', 'strapi'),
+        database: env('DATABASE_NAME', 'EcommerceBD'),
+        user: env('DATABASE_USERNAME', ''),
+        password: env('DATABASE_PASSWORD', ''),
         ssl: env.bool('DATABASE_SSL', false) && {
           key: env('DATABASE_SSL_KEY', undefined),
           cert: env('DATABASE_SSL_CERT', undefined),
@@ -28,8 +28,8 @@ export default ({ env }) => {
         host: env('DATABASE_HOST', 'localhost'),
         port: env.int('DATABASE_PORT', 5432),
         database: env('DATABASE_NAME', 'EcommerceBD'),
-        user: env('DATABASE_USERNAME', ''),
-        password: env('DATABASE_PASSWORD', ''),
+        user: env('DATABASE_USERNAME', 'postgres'),
+        password: env('DATABASE_PASSWORD', 'NexusCore77'),
         ssl: env.bool('DATABASE_SSL', false) && {
           key: env('DATABASE_SSL_KEY', undefined),
           cert: env('DATABASE_SSL_CERT', undefined),
